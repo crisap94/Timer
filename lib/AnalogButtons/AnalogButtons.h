@@ -36,14 +36,13 @@ public:
 	uint16_t value;
 
 	// hold information
-	uint32_t duration;
+	uint16_t duration;
 	uint16_t interval;
 	boolean isHeldDown;
 	boolean isClicked;
 
 	Button() {};
-	Button(uint16_t value, void (*clickFunction)(void));
-	Button(uint16_t value, void (*clickFunction)(void), void (*holdFunction)(void), uint16_t holdDuration, uint16_t holdInterval);
+	Button(uint16_t value, void (*clickFunction)(void), void (*holdFunction)(void) = 0, uint16_t holdDuration = 750, uint16_t holdInterval = 250);
 
 	// Override these function if you want
 	inline void pressed() {
@@ -68,8 +67,8 @@ class AnalogButtons {
 private:
 	uint32_t previousMillis;
 	uint8_t margin;
-	uint16_t debounce;
-	uint16_t previusTimeDebounce;
+	uint8_t debounce;
+	uint32_t previusTimeDebounce;
 
 	// AnalogPin
 	uint8_t pin;
@@ -78,8 +77,8 @@ private:
 	Button buttons[ANALOGBUTTONS_MAX_SIZE];
 
 public:
-	AnalogButtons(uint8_t pin, uint8_t margin = 10);
-	AnalogButtons(uint8_t pin, uint8_t margin,uint16_t debounce);
+
+	AnalogButtons(uint8_t pin, uint8_t margin = 20, uint8_t debounce = 100);
 
 	void add(Button button);
 	void setDebounce(uint16_t debounce = 60);

@@ -1,17 +1,7 @@
 #include "AnalogButtons.h"
 #include <Arduino.h>
 
-Button::Button(uint16_t value, void (*clickFunction)(void)) {
-	this->value = value;
-	this->duration = 1000;
-	this->interval = 250;
-	this->isHeldDown = false;
-	this->isClicked = false;
-	this->clickFunction = clickFunction;
-	this->holdFunction = 0;
-}
-
-Button::Button(uint16_t value, void (*clickFunction)(void), void (*holdFunction)(void), uint16_t holdDuration, uint16_t holdInterval) {
+Button::Button(uint16_t value, void (*clickFunction)(void), void (*holdFunction)(void) , uint16_t holdDuration , uint16_t holdInterval) {
 	this->value = value;
 	this->duration = holdDuration;
 	this->interval = holdInterval;
@@ -20,27 +10,15 @@ Button::Button(uint16_t value, void (*clickFunction)(void), void (*holdFunction)
 	this->clickFunction = clickFunction;
 	this->holdFunction = holdFunction;
 }
-/**
- * Constructor AnalogButtons
- * @param pin Analog Pin that will read al the data
- * @param margin Let's you have a better accuracy when press a button, avodind the wrong data collection
- *
- */
-AnalogButtons::AnalogButtons(uint8_t pin, uint8_t margin) {
-	this->pin = pin;
-	this->margin = margin;
-	this->debounce = 60;
-	this->previusTimeDebounce = 0;
-}
 
 /**
  * Constructor
  * @param pin Analog Pin that will read al the data
  * @param margin Let's you have a better accuracy when press a button, avodind the wrong data collection
- * @param debounce it let you have more control when pressing the button
+ * @param debounce it let you have more control when pressing the button Max = 255
  */
 
-AnalogButtons::AnalogButtons(uint8_t pin, uint8_t margin,uint16_t debounce) {
+AnalogButtons::AnalogButtons(uint8_t pin, uint8_t margin ,uint8_t debounce) {
 	this->pin = pin;
 	this->margin = margin;
 	this->debounce = debounce;
@@ -57,6 +35,10 @@ void AnalogButtons::add(Button button) {
   	}
 }
 
+/**
+ * Set the debounce yo want for the button, sometimes it works better with highter or lower, that depends on you harware button
+ * @param debounce time in milliseconds of the preferred debounce
+ */
 void AnalogButtons::setDebounce(uint16_t debounce) {
 	this->debounce = debounce;
 }
