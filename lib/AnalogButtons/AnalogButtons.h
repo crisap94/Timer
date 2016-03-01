@@ -55,8 +55,6 @@ public:
 	inline void held() {
 		if (holdFunction)
 			(*holdFunction)();
-		else
-			pressed();
 	}
 private:
 	void (*clickFunction)(void);
@@ -70,6 +68,8 @@ class AnalogButtons {
 private:
 	uint32_t previousMillis;
 	uint8_t margin;
+	uint16_t debounce;
+	uint16_t previusTimeDebounce;
 
 	// AnalogPin
 	uint8_t pin;
@@ -79,9 +79,10 @@ private:
 
 public:
 	AnalogButtons(uint8_t pin, uint8_t margin = 10);
+	AnalogButtons(uint8_t pin, uint8_t margin,uint16_t debounce);
 
 	void add(Button button);
-
+	void setDebounce(uint16_t debounce = 60);
 	void check();
 };
 
