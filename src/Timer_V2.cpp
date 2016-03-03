@@ -1,14 +1,14 @@
 #include <Arduino.h>
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
-#include <AnalogButtons.h>
+#include <ArrayButtons.h>
 
-uint8_t analogButtonsPin = A3;
+uint8_t arrayButtonsPin = A3;
 uint8_t pinRelay = 4;
 
 LiquidCrystal_I2C lcd(0x3F, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);
 
-AnalogButtons analogButtons = AnalogButtons(analogButtonsPin,20);
+ArrayButtons analogButtons = ArrayButtons(arrayButtonsPin,20);
 
 void start_stop_ButtonClick();
 void M_ButtonClick();
