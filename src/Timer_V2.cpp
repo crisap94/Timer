@@ -21,11 +21,11 @@ void noneButtonPressed();
 void turnOffSwitch();
 void turnOnSwitch();
 
-Button start_stop_Button = Button(72, &start_stop_ButtonClick);
-Button M_Button = Button(215, &M_ButtonClick);
-Button m_Button = Button(400, &m_ButtonClick);
-Button S_Button = Button(730, &S_ButtonClick);
-Button s_Button = Button(1023, &s_ButtonClick);
+Button start_stop_Button(72, &start_stop_ButtonClick);
+Button M_Button(215, &M_ButtonClick);
+Button m_Button(400, &m_ButtonClick);
+Button S_Button(730, &S_ButtonClick);
+Button s_Button(1023, &s_ButtonClick);
 
 //tiempo ingresado por el usuario
 int8_t minutes 			= 0;
@@ -53,6 +53,7 @@ void setup(){
   analogButtons.add(m_Button);
   analogButtons.add(S_Button);
   analogButtons.add(s_Button);
+  analogButtons.setDebounce(120);
 
   // Serial.begin(9600);
   lcd.begin(16,2);
